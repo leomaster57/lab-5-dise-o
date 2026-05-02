@@ -198,19 +198,209 @@ y ocurre para
 \[
 \boxed{\beta=30^\circ}.
 \]
-Aquı deben exponer detalladamente el proceso de diseño y analisis. Pueden dividir esta seccion en subsecciones para organizar mejor la informacion.
+\subsection{Actividad 1.2(c): Memoria de cálculo de cargas externas}
 
-\subsection{Analisis del problema}
+Para determinar las cargas externas de los elementos de la gata mecánica se resolvió el equilibrio estático del mecanismo mediante un sistema matricial implementado en Python. Se trabajó con los datos del problema:
 
-Describan el problema de diseño que abordaron, incluyendo los requisitos y restricciones. Utilicen figuras y tablas para ilustrar conceptos clave.
+\[
+P=9613.8 \ \mathrm{N},
+\]
 
-\subsection{Solucion propuesta}
+\[
+L=250 \ \mathrm{mm},
+\]
 
-Expliquen la solucion que desarrollaron, justificando las decisiones de diseño. Pueden incluir diagramas, simulaciones y calculos que respalden su propuesta.
+\[
+D=32 \ \mathrm{mm},
+\]
 
-\subsection{Validacion}
+\[
+e=0 \ \mathrm{mm}.
+\]
 
-Presenten como validaron su diseño, ya sea a traves de pruebas, simulaciones o comparaciones con modelos teoricos. Los resultados deben ser discutidos de manera crıtica.
+Como \(e=0\), la carga se considera centrada y el sistema se analiza como simétrico. Se toma como condición más desfavorable el ángulo
+
+\[
+\beta=30^\circ,
+\]
+
+ya que las cargas axiales de los brazos y la fuerza del tornillo aumentan cuando el ángulo \(\beta\) disminuye. Además, este mismo ángulo será utilizado posteriormente como condición de diseño para el análisis de resistencia de la gata.
+
+Los elementos 2, 4, 5 y 7 se modelan como barras de dos fuerzas, por lo que transmiten principalmente carga axial. Además, se consideran pasadores ideales, sin transmisión de momento, y se desprecia la fricción en los pasadores.
+
+Se definen las incógnitas del sistema como
+
+\[
+\vec{x}=
+\begin{bmatrix}
+N_2\\
+N_4\\
+N_7\\
+N_5\\
+F_s\\
+R_y
+\end{bmatrix},
+\]
+
+donde \(N_2\), \(N_4\), \(N_5\) y \(N_7\) corresponden a las cargas axiales en los brazos, \(F_s\) corresponde a la fuerza axial del tornillo y \(R_y\) corresponde a la reacción vertical de la base.
+
+Para la placa superior, correspondiente al elemento 3, se plantean las ecuaciones de equilibrio:
+
+\[
+\sum F_x=0:
+\]
+
+\[
+N_2\cos\beta-N_4\cos\beta=0,
+\]
+
+\[
+\sum F_y=0:
+\]
+
+\[
+N_2\sin\beta+N_4\sin\beta-P=0.
+\]
+
+Para la base inferior, correspondiente al elemento 6, se obtiene:
+
+\[
+\sum F_x=0:
+\]
+
+\[
+N_7\cos\beta-N_5\cos\beta=0,
+\]
+
+\[
+\sum F_y=0:
+\]
+
+\[
+R_y-N_7\sin\beta-N_5\sin\beta=0.
+\]
+
+Finalmente, para el nudo lateral izquierdo se tiene:
+
+\[
+\sum F_x=0:
+\]
+
+\[
+F_s-N_2\cos\beta-N_7\cos\beta=0,
+\]
+
+\[
+\sum F_y=0:
+\]
+
+\[
+-N_2\sin\beta+N_7\sin\beta=0.
+\]
+
+El sistema anterior se escribe en forma matricial como
+
+\[
+A\vec{x}=\vec{b}.
+\]
+
+Para \(\beta=30^\circ\), con \(\sin(30^\circ)=0.5\) y \(\cos(30^\circ)=0.866\), la matriz utilizada es
+
+\[
+\begin{bmatrix}
+0.866 & -0.866 & 0 & 0 & 0 & 0\\
+0.5 & 0.5 & 0 & 0 & 0 & 0\\
+0 & 0 & 0.866 & -0.866 & 0 & 0\\
+0 & 0 & -0.5 & -0.5 & 0 & 1\\
+-0.866 & 0 & -0.866 & 0 & 1 & 0\\
+-0.5 & 0 & 0.5 & 0 & 0 & 0
+\end{bmatrix}
+\begin{bmatrix}
+N_2\\
+N_4\\
+N_7\\
+N_5\\
+F_s\\
+R_y
+\end{bmatrix}
+=
+\begin{bmatrix}
+0\\
+9613.8\\
+0\\
+0\\
+0\\
+0
+\end{bmatrix}.
+\]
+
+Este sistema fue resuelto mediante Python utilizando la función \texttt{numpy.linalg.solve}. El código completo se adjunta en el anexo de memoria de cálculo. Los resultados obtenidos para \(\beta=30^\circ\) se presentan en la Tabla \ref{tab:cargas_principales}.
+
+\begin{table}[H]
+\centering
+\caption{Cargas externas principales para \(\beta=30^\circ\).}
+\label{tab:cargas_principales}
+\begin{tabular}{lcc}
+\hline
+Elemento & Tipo de carga & Magnitud \\
+\hline
+Elemento 2 & Axial & \(9.614 \ \mathrm{kN}\) \\
+Elemento 4 & Axial & \(9.614 \ \mathrm{kN}\) \\
+Elemento 5 & Axial & \(9.614 \ \mathrm{kN}\) \\
+Elemento 7 & Axial & \(9.614 \ \mathrm{kN}\) \\
+Tornillo 1 & Axial & \(16.652 \ \mathrm{kN}\) \\
+Placa superior 3 & Carga vertical & \(9.614 \ \mathrm{kN}\) \\
+Base inferior 6 & Reacción vertical & \(9.614 \ \mathrm{kN}\) \\
+\hline
+\end{tabular}
+\end{table}
+
+Además, para cada brazo se tiene una fuerza axial de magnitud
+
+\[
+N=9613.8 \ \mathrm{N}.
+\]
+
+Sus componentes en los ejes \(x\) e \(y\) son
+
+\[
+N_x=N\cos(30^\circ)=8325.8 \ \mathrm{N},
+\]
+
+\[
+N_y=N\sin(30^\circ)=4806.9 \ \mathrm{N}.
+\]
+
+Las componentes de fuerza en cada brazo se resumen en la Tabla \ref{tab:componentes_brazos}. Se utiliza la convención de signos con \(+x\) hacia la derecha y \(+y\) hacia arriba.
+
+\begin{table}[H]
+\centering
+\caption{Componentes de fuerza en los brazos para \(\beta=30^\circ\).}
+\label{tab:componentes_brazos}
+\begin{tabular}{lccc}
+\hline
+Elemento & \(F_x\) [N] & \(F_y\) [N] & \(|F|\) [N] \\
+\hline
+Brazo 2 & \(8325.8\) & \(4806.9\) & \(9613.8\) \\
+Brazo 4 & \(-8325.8\) & \(4806.9\) & \(9613.8\) \\
+Brazo 7 & \(8325.8\) & \(-4806.9\) & \(9613.8\) \\
+Brazo 5 & \(-8325.8\) & \(-4806.9\) & \(9613.8\) \\
+Tornillo 1 & \(16651.6\) & \(0\) & \(16651.6\) \\
+\hline
+\end{tabular}
+\end{table}
+
+Con estos resultados se concluye que, debido a la simetría del sistema, los elementos 2, 4, 5 y 7 soportan la misma carga axial. La mayor carga externa corresponde al tornillo, con
+
+\[
+F_s=16.652 \ \mathrm{kN},
+\]
+
+mientras que cada brazo de la gata soporta
+
+\[
+N=9.614 \ \mathrm{kN}.
+\]
 
 \section{Conclusiones}
 
