@@ -1,0 +1,231 @@
+\documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{lipsum}  
+\usepackage{graphicx} 
+\usepackage{fancyhdr}
+\usepackage{float}
+
+\pagestyle{fancy}
+\fancyhf{} 
+\fancyhead[L]{\textit{XXXX}} % Apellido del autor, o numero de grupo 
+\fancyhead[R]{\textit{YYYY}} % Título del trabajo
+
+\fancyfoot[L]{\footnotesize \textit{ICM2022 2025-2 - Diseño Mecánico}}
+\fancyfoot[C]{\footnotesize \textit{\thepage}} 
+\fancyfoot[R]{\footnotesize \textit{\today}} 
+
+\journal{ICM2022 - Diseño Mecánico}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{
+\begin{minipage}[c]{0.3\textwidth}
+\centering
+\includegraphics[width=0.3\textwidth]{logo-uc.jpg}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.3\textwidth}
+\centering
+Tarea X - Nombre de la tarea - Grupo:XX (si es que la entrega es grupal) % Titulo del informe
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.3\textwidth}
+\centering
+\includegraphics[width=0.3\textwidth]{logo_ing_uc.png}
+\end{minipage}
+}
+
+\author[a1]{Nombre1 Apellido1} % Aqui coloque nombre y apellido del alumno 1
+\author[a2]{Nombre2 Apellido3} % Aqui coloque nombre y apellido del alumno 2
+\author[a3]{Nombre3 Apellido3} % Aqui coloque nombre y apellido del alumno 3
+\affiliation[a1]{organization={Major, Minor, Escuela de Ingeniería, Pontificia Universidad Católica de Chile} % Ingrese su major y minor, alumno1
+	    }
+\affiliation[a2]{organization={Major, Minor, Escuela de Ingeniería, Pontificia Universidad Católica de Chile} % Ingrese su major y minor, alumno2
+            }            
+\affiliation[a3]{organization={Major, Minor, Escuela de Ingeniería, Pontificia Universidad Católica de Chile} % Ingrese su major y minor, alumno3
+            }           
+
+\begin{abstract}
+
+Este documento es un template para la entrega de trabajos en el curso de Diseño Mecanico. Los estudiantes deben utilizar este formato, que sigue el estilo de un artıculo cientıfico. El documento debe ser autocontenido; es decir, debe incluir toda la informacion relevante y los planos dentro del PDF. Los archivos nativos de planos, codigos, y otros documentos relacionados deben ser entregados como respaldo adicional, pero la revision se centrara principalmente en el contenido presentado en este documento PDF. Todas las imagenes deben estar incluidas en el cuerpo del documento, y las tablas, graficos, y ecuaciones deben estar numeradas. Se permite utilizar anexos para incorporar planos o imagenes que no sean legibles en el texto principal.
+
+\end{abstract}
+
+\end{frontmatter}
+
+\section{Introducción}
+
+En este laboratorio se analiza una gata mecánica tipo tijera. La idea es entender la estática del sistema y cuánto esfuerzo pide el tornillo para levantar la carga. Para mi número, con \(X=2\), \(Y=0\) y \(Z=7\), se trabaja con una masa de \(W=980\) kg, equivalente a una carga de \(9613.8\) N. Además, se considera \(L=250\) mm, \(D=32\) mm y un caso simétrico con excentricidad \(e=0\). El ángulo \(\beta\) se mide desde la horizontal.
+
+\section{Desarrollo}
+
+\subsection{Actividad 1.2(a): Fuerza del tornillo en función del ángulo \texorpdfstring{$\beta$}{beta}}
+
+Para determinar la fuerza realizada por el elemento 1, correspondiente al tornillo, se realiza el equilibrio estático de la gata mecánica considerando el caso simétrico. La carga vertical aplicada sobre la placa superior es
+
+\[
+P = mg = 980 \cdot 9.81 = 9613.8 \ \mathrm{N}.
+\]
+
+A partir del equilibrio del mecanismo, la fuerza axial en el tornillo queda dada por
+
+\[
+F_s(\beta)=\frac{P}{\tan(\beta)}.
+\]
+
+Esta expresión muestra que la fuerza exigida al tornillo aumenta cuando el ángulo \(\beta\) disminuye. Por lo tanto, los ángulos pequeños corresponden a la condición más exigente para el tornillo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{Grafico1}
+    \caption{Fuerza axial del tornillo \(F_s\) en función del ángulo \(\beta\) para una carga de \(P=9613.8\) N.}
+    \label{fig:grafico_fs_beta}
+\end{figure}
+
+Como se observa en la Figura \ref{fig:grafico_fs_beta}, la fuerza axial del tornillo disminuye a medida que aumenta el ángulo \(\beta\). Esto confirma que la condición más desfavorable ocurre para el menor ángulo de operación considerado.
+\subsection{Actividad 1.2(b): Torque máximo para levantar la carga}
+
+Para el cálculo del torque requerido para levantar la carga se considera una rosca trapezoidal métrica. De acuerdo con la geometría de este tipo de rosca, se utiliza un ángulo incluido de hilo de
+
+\[
+\theta_h = 30^\circ.
+\]
+
+Por lo tanto, el semiángulo de flanco es
+
+\[
+\alpha_h = \frac{\theta_h}{2}=15^\circ.
+\]
+
+La fuerza axial en el tornillo depende del ángulo de apertura de la gata mecánica y está dada por
+
+\[
+F_s(\beta)=\frac{P}{\tan(\beta)}.
+\]
+
+Como esta fuerza aumenta cuando el ángulo \(\beta\) disminuye, el torque máximo ocurre para el menor ángulo de operación considerado. En este trabajo se toma
+
+\[
+\beta = 30^\circ,
+\]
+
+ya que este es el ángulo de diseño utilizado posteriormente para el análisis de resistencia de la gata.
+
+Con la carga calculada anteriormente,
+
+\[
+P=9613.8 \ \mathrm{N},
+\]
+
+la fuerza axial máxima en el tornillo resulta
+
+\[
+F_s(30^\circ)=\frac{9613.8}{\tan(30^\circ)}
+=16651.6 \ \mathrm{N}.
+\]
+
+Para estimar el torque de levantamiento se considera el efecto de la fricción en la rosca. El torque requerido se calcula mediante
+
+\[
+T = F_s \frac{d_m}{2}\tan(\lambda+\rho'),
+\]
+
+donde \(d_m\) es el diámetro medio de la rosca, \(\lambda\) es el ángulo de avance y \(\rho'\) es el ángulo de fricción efectivo. Estos ángulos se definen como
+
+\[
+\lambda = \arctan\left(\frac{l}{\pi d_m}\right),
+\]
+
+\[
+\rho'=\arctan\left(\frac{\mu}{\cos(\alpha_h)}\right).
+\]
+
+Como el enunciado no entrega las dimensiones específicas del tornillo, se adopta como supuesto una rosca trapezoidal comercial \(Tr\,20\times4\), con diámetro medio aproximado
+
+\[
+d_m = 18 \ \mathrm{mm}
+\]
+
+y avance
+
+\[
+l = 4 \ \mathrm{mm}.
+\]
+
+Además, se considera un coeficiente de fricción acero-acero
+
+\[
+\mu = 0.15.
+\]
+
+Luego,
+
+\[
+\lambda = \arctan\left(\frac{4}{\pi(18)}\right)
+=4.04^\circ,
+\]
+
+\[
+\rho'=\arctan\left(\frac{0.15}{\cos(15^\circ)}\right)
+=8.83^\circ.
+\]
+
+Finalmente, usando \(d_m=0.018\) m,
+
+\[
+T_{\max}
+=
+16651.6\frac{0.018}{2}
+\tan(4.04^\circ+8.83^\circ),
+\]
+
+\[
+T_{\max}=34.3 \ \mathrm{N\,m}.
+\]
+
+Por lo tanto, el torque máximo necesario para levantar la carga es
+
+\[
+\boxed{T_{\max}=34.3 \ \mathrm{N\,m}}
+\]
+
+y ocurre para
+
+\[
+\boxed{\beta=30^\circ}.
+\]
+Aquı deben exponer detalladamente el proceso de diseño y analisis. Pueden dividir esta seccion en subsecciones para organizar mejor la informacion.
+
+\subsection{Analisis del problema}
+
+Describan el problema de diseño que abordaron, incluyendo los requisitos y restricciones. Utilicen figuras y tablas para ilustrar conceptos clave.
+
+\subsection{Solucion propuesta}
+
+Expliquen la solucion que desarrollaron, justificando las decisiones de diseño. Pueden incluir diagramas, simulaciones y calculos que respalden su propuesta.
+
+\subsection{Validacion}
+
+Presenten como validaron su diseño, ya sea a traves de pruebas, simulaciones o comparaciones con modelos teoricos. Los resultados deben ser discutidos de manera crıtica.
+
+\section{Conclusiones}
+
+Resuman los hallazgos mas importantes de su trabajo y discutan las posibles mejoras o futuras lıneas de investigacion. Las conclusiones deben ser coherentes con los objetivos planteados en la introduccion.
+
+\section{Referencias}
+
+Incluyan todas las fuentes bibliograficas que utilizaron para respaldar su trabajo. Utilicen un formato de citacion consistente y asegurense de citar adecuadamente todas las referencias.
+
+\newpage
+\onecolumn
+\section{Anexos}
+
+\subsection{Planos detallados}
+
+\subsection{Memoria de calculo}
+
+\end{document}
